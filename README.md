@@ -31,7 +31,7 @@ urllib3==1.25.3
 
 ### Scrapping
 
-Pour se faire, n'oublier pas d'indiquer le bon url: ligne 351
+Pour se faire, n'oublier pas d'indiquer le bon url: ligne 351 et bien nommé vos fichiers: ligne 417, 418
 Le script permet d'aller sur les pages du site SeLoger.com, et d'aller sur deux types d'annonce:
 - SeLoger.com
 <img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/SeLoger_Annonce.png" width="300"/>
@@ -43,7 +43,8 @@ Le script permet d'aller sur les pages du site SeLoger.com, et d'aller sur deux 
 
 <img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/PredictLogement.png" width="300"/>
 
-run the app by installing streamlit with pip and typing
+Take `csv_int_final`and change path line 24.
+Run the app by installing streamlit with pip and typing
 ```
 streamlit run seloger_app.py
 ```
