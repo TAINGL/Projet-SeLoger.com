@@ -15,9 +15,9 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.metrics import mean_squared_error
 
-
 from sklearn.linear_model import LinearRegression, Lasso, Ridge, ElasticNet, SGDClassifier
 from sklearn.ensemble import GradientBoostingRegressor
+import locale
 
 # CHANGER LE CHEMIN D'IMPORTATION DES FICHIERS CSV SELON L'UTILISATEUR
 # Import the data (features + labels)
@@ -213,4 +213,6 @@ if st.checkbox('Prediction'):
     #st.text("Justesse du modele")
     #st.write(round(score,2),"%")
     st.subheader("Prix du logement")
-    st.write("Le prix de vente du logement est estimé à {} €".format(abs(round(predict_prices[0],2))))
+    l = locale.setlocale(locale.LC_ALL, '') # avoir le bon currency format
+    price = locale.currency(predict_prices[0], grouping=True) 
+    st.write("Le prix de vente du logement est estimé à {} €".format(price))
