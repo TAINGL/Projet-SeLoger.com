@@ -34,14 +34,14 @@ urllib3==1.25.3
 Pour se faire, n'oublier pas d'indiquer le bon url: ligne 351
 Le script permet d'aller sur les pages du site SeLoger.com, et d'aller sur deux types d'annonce:
 - SeLoger.com
-<img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/SeLoger_Annonce.png" width="100"/>
+<img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/SeLoger_Annonce.png" width="300"/>
 
 - Belle Demeure
-<img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/BD_Annonce.png" width="100"/>
+<img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/BD_Annonce.png" width="300"/>
 
 ### Application Streamlit
 
-<img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/PredictLogement.png" width="100"/>
+<img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/PredictLogement.png" width="300"/>
 
 run the app by installing streamlit with pip and typing
 ```
