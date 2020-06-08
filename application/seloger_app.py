@@ -211,7 +211,7 @@ predict_prices, score_rmse = modele()
 if st.checkbox('Prediction'):
     #st.subheader('Metrique du modele')
     #st.text("Justesse du modele")
-    #st.write(round(score,2),"%")
+    #st.write(round(score_rmse,2),"%")
     st.subheader("Prix du logement")
     l = locale.setlocale(locale.LC_ALL, '') # avoir le bon currency format
     price = locale.currency(predict_prices[0], grouping=True) 
