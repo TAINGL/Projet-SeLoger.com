@@ -32,6 +32,7 @@ urllib3==1.25.3
 ### Scrapping
 
 Pour se faire, n'oublier pas d'indiquer le bon url: ligne 351 et bien nommé vos fichiers: ligne 417, 418
+
 Le script permet d'aller sur les pages du site SeLoger.com, et d'aller sur deux types d'annonce:
 - SeLoger.com
 <img src="https://github.com/TAINGL/Projet-SeLoger.com/blob/master/img/SeLoger_Annonce.png" width="300"/>
