@@ -23,8 +23,8 @@ import locale
 # CHANGER LE CHEMIN D'IMPORTATION DES FICHIERS CSV SELON L'UTILISATEUR
 # Import the data (features + labels)
 DATA_URL = {
-    'Lyon': '/Users/Johanna/Documents/SIMPLON DATA IA/IA/ML PROJET/PROJET SELOGER.COM/csv/csv_int_final/lyon_df.csv',
-    'Paris': '/Users/Johanna/Documents/SIMPLON DATA IA/IA/ML PROJET/PROJET SELOGER.COM/csv/csv_int_final/paris_df.csv'
+    'Lyon': 'https://github.com/TAINGL/Projet-SeLoger.com/blob/master/csv/csv_int_final/lyon_df.csv',
+    'Paris': 'https://github.com/TAINGL/Projet-SeLoger.com/blob/master/csv/csv_int_final/paris_df.csv'
 }
 
 # SideBar with features and option 
