@@ -15,6 +15,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.metrics import mean_squared_error
 
+
 from sklearn.linear_model import LinearRegression, Lasso, Ridge, ElasticNet, SGDClassifier
 from sklearn.ensemble import GradientBoostingRegressor
 import locale
@@ -42,7 +43,7 @@ st.image('https://www.strategies.fr/sites/default/files/assets/images/strats-ima
 def get_data(dic, column):
     target = "sl_prix"
     seloger =  pd.read_csv(dic[column], index_col = 0)
-    y = seloger[target]# get labels
+    y = np.log(seloger[target])# get labels
     X = seloger.drop(target, axis=1) #
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
     return seloger, X_train, X_test, y_train, y_test
@@ -53,17 +54,16 @@ def get_data(dic, column):
 def classifiers(classifier):
     classifiers = {
         'Linear Regression': LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False),
-        'Lasso': Lasso(alpha=0.01, copy_X=True, fit_intercept=True, max_iter=1000,
+        'Lasso': Lasso(alpha=0.001, copy_X=True, fit_intercept=True, max_iter=1000,
                        normalize=False, positive=False, precompute=False, random_state=None,
                        selection='cyclic', tol=0.0001, warm_start=False),
-        'Ridge': Ridge(alpha=10, copy_X=True, fit_intercept=True, max_iter=None, normalize=False,
+        'Ridge': Ridge(alpha=2, copy_X=True, fit_intercept=True, max_iter=None, normalize=False,
                        random_state=None, solver='auto', tol=0.001),
-        'Elastic net': ElasticNet(alpha=0.01, copy_X=True, fit_intercept=True, l1_ratio=0.3,
+        'Elastic net': ElasticNet(alpha=0.01, copy_X=True, fit_intercept=True, l1_ratio=0,
                                   max_iter=1000, normalize=False, positive=False, precompute=False,
                                   random_state=None, selection='cyclic', tol=0.0001, warm_start=False), 
         'Ensemble': GradientBoostingRegressor(n_estimators = 400, max_depth = 5, min_samples_split = 2,
                                               learning_rate = 0.1, loss = 'ls')
-
     }
 
     classifiers[classifier].fit(X_train, y_train)
@@ -112,10 +112,12 @@ def input_data():
     min_taille = min(seloger['sl_taille'])
     max_taille = max(seloger['sl_taille'])
     Taille = st.sidebar.slider("Taille", min_value= min_taille,  max_value= max_taille)
-    st.sidebar.title("Nombre de pièce")        
-    Piece = st.sidebar.selectbox("Nombre de piece",sorted(seloger['sl_nb_piece'].unique()))
-    st.sidebar.title("Nombre de chambre")       
-    Chambre = st.sidebar.selectbox("Nombre de chambre",sorted(seloger['sl_nb_chambre'].unique()))
+    st.sidebar.title("Nombre de pièce")
+    res_piece = sorted(seloger['sl_nb_piece'].unique())         
+    Piece = st.sidebar.selectbox("Nombre de piece",res_piece)
+    st.sidebar.title("Nombre de chambre")
+    res_chambre = sorted(seloger['sl_nb_chambre'].unique())         
+    Chambre = st.sidebar.selectbox("Nombre de chambre",res_chambre)
 
     # Description du logement
     st.sidebar.title("Logement situé à/au")     
@@ -160,8 +162,8 @@ def input_data():
     st.sidebar.title("Présence d'une belle vue?") 
     Vue = st.sidebar.radio("Présence d'une belle vue", ('Oui', 'Non'))
     vue_logement = if_yes_then(Vue, 'sl_vue')
-    st.sidebar.title("Logement neuf?")          
-    Neuf = st.sidebar.radio("Logement neuf?", ('Oui', 'Non'))
+    st.sidebar.title("Logement refait à neuf?")          
+    Neuf = st.sidebar.radio("Logement refait à neuf?", ('Oui', 'Non'))
     neuf_logement = if_yes_then(Neuf, 'sl_neuf')
     st.sidebar.title("Sol avec parquet")       
     Parquet = st.sidebar.radio("Sol avec parquet", ('Oui', 'Non'))
@@ -200,7 +202,8 @@ def modele():
 
    # display prediction
     predict_prices = classifier.predict(df_user)
-
+    predict_prices = np.exp(predict_prices)
+    
     return predict_prices, score_rmse
 
 
@@ -216,3 +219,4 @@ if st.checkbox('Prediction'):
     l = locale.setlocale(locale.LC_ALL, '') # avoir le bon currency format
     price = locale.currency(predict_prices[0], grouping=True) 
     st.write("Le prix de vente du logement est estimé à {} €".format(price))
+    
