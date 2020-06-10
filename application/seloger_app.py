@@ -183,7 +183,7 @@ def input_data():
     df_user = pd.DataFrame(input_user, columns = ['sl_localisation','sl_style','sl_taille','sl_nb_piece','sl_nb_chambre',
                                                   'sl_etage','sl_hauteur','sl_annee','sl_salle_d_eau','sl_salle_de_bain','sl_toilette','sl_cuisine',
                                                   'sl_ascenseur', 'sl_parking', 'sl_cave', 'sl_balcon', 'sl_terrasse',
-                                                   'sl_exposition','sl_vue', 'sl_neuf', 'sl_parquet', 'sl_gardien']) 
+                                                  'sl_exposition','sl_vue', 'sl_neuf', 'sl_parquet', 'sl_gardien']) 
 
     classifier, y_pred =classifiers(Model)
 
